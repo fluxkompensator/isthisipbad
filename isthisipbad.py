@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # Name:     isthisipbad.py
-# Purpose:  Checka IP against popular IP blacklist
-# By:       Jerry Gamblin
-# Date:     11.05.15
-# Modified  11.05.15
-# Rev Level 0.5
+# Purpose:  Check a IP against popular IP blacklists
+# By:       fluxkompensator for of Jerry Gamblin
+# Date:     28.10.16
+# Modified  28.10.16
+# Rev Level 0.6
 # -----------------------------------------------
 # Downloaded from GitHub page:
-# https://github.com/jgamblin/isthisipbad/blob/master/isthisipbad.py
-# Modified by MJC to fix errors.
+# https://github.com/fluxkompensator/isthisipbad 
+# Modified by fluxkompensator to fix errors.
 
 import os
 import sys
@@ -58,10 +58,16 @@ def content_test(url, badip):
     try:
         request = urllib2.Request(url)
         opened_request = urllib2.build_opener().open(request)
-	html_content = opened_request.read()
-	retcode = opened_request.code
+        html_content = opened_request.read()
+        retcode = opened_request.code
+    
+        #if url == "http://malc0de.com/bl/IP_Blacklist.txt":
+        #    print(retcode)
+        #    print(re.findall(badip, html_content))
+        #    print("----------------")
 
-	matches = retcode == 200
+
+        matches = retcode == 200
         matches = matches and re.findall(badip, html_content)
 
         return len(matches) == 0
@@ -169,10 +175,10 @@ URLS = [
      True),
 
     #malc0de
-    ('http://malc0de.com/bl/IP_Blacklist.txt',
-     'is not listed on malc0de',
-     'is listed on malc0de',
-     True),
+    #('http://malc0de.com/bl/IP_Blacklist.txt',
+    # 'is not listed on malc0de',
+    # 'is listed on malc0de',
+    # True),
 
     #MalWareBytes
     ('http://hosts-file.net/rss.asp',
@@ -231,7 +237,7 @@ if __name__ == "__main__":
 
     for url, succ, fail, mal in URLS:
         if content_test(url, badip):
-	    if args.success:
+            if args.success:
                 print(green('{0} {1}'.format(badip, succ)))
             GOOD = GOOD + 1
         else:
