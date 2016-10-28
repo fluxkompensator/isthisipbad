@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Name:     isthisipbad.py
 # Purpose:  Check a IP against popular IP blacklists
-# By:       fluxkompensator for of Jerry Gamblin
+# By:       fluxkompensator fork of Jerry Gamblin's isthisipbad.py
 # Date:     28.10.16
 # Modified  28.10.16
 # Rev Level 0.6
